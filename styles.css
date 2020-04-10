@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:600,800|Quicksand:400,600,700&display=swap');
+
+:root {
+    --font-fam: "Quicksand", sans-serif;
+    --font-display: "Montserrat", sans-serif;
+    --shadow-light: 2px 2px 5px #D8D8D8;
+    --rgba-green: rgba(61, 143, 80, 1);
+    --rgba-red: rgba(179, 52, 43, 1);
+    --rgba-orange: rgba(252, 182, 3, 1);
+    --rgba-orange-80: rgba(252, 182, 3, .8);
+    --rgba-black: rgba(38, 38, 38, 1);
+
+    --rgba-pale-blue: #81d2e3;
+    --hex-shadow: #D8D8D8;
+}
+
+* {box-sizing: border-box;}
+
+body {
+    font-size: 20px;
+    font-family: var(--font-fam);
+    font-weight: 400;
+    margin: 0;
+    color: var(--rgba-black);
+}
+
+ul {
+    list-style-type: none;
+    padding-inline-start: 0;
+    width: 40em;
+    margin: 0 auto;
+    padding: 0 .5em;
+}
+
+li {
+    position: relative;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: .75em;
+    box-shadow: var(--shadow-light);
+
+}
+li:not(.input-bar) {
+    min-height: 3em;
+    box-sizing: border-box;
+    padding: 1em 0;
+}
+
+h1 {font-size: 50px;}
+
+#warning {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    height: 64px;
+    width: 100%;
+    background-color: var(--rgba-red);
+    color: #fff;
+    opacity: 0;
+    transition: opacity .3s;
+}
+#warning .active {
+    opacity: 1;
+}
+
+#hero {
+    width: 40em;
+    margin: 0 auto;
+    padding: 0 .5em;
+}
+#hero > * {
+    cursor: default;
+}
+#hero h1#date {
+    margin-bottom: 0;
+    font-family: var(--font-display);
+    font-weight: 800;
+}
+#hero h2 {
+    font-weight: 600;
+    margin: .5em 0 2em 0;
+    font-size: larger;
+}
+
+#warning span {
+    font-family: var(--font-display);
+    font-weight: 800;
+}
+#warning span {cursor: default;}
+
+.input-bar > * {height: 64px; font-size: 20px;}
+
+#task-input {
+    flex-grow: 2; 
+    padding: 0 .75em; 
+    font-family: var(--font-fam);
+    border: none;
+}
+#task-input,
+#task-input::placeholder {color: var(--hex-shadow);}
+#task-input:focus {outline: 2px solid rgb(181, 228, 255); color: #000;}
+
+.input-bar button {
+    padding: 0 1.75em; 
+    font-family: var(--font-fam); 
+    color: #fff;
+    border: none;
+}
+.input-bar button#submit {background-color: var(--rgba-green);}
+.input-bar button#clear {background-color: var(--rgba-red);}
+.input-bar button:focus {outline: 2px solid rgb(181, 228, 255);}
+
+.input-bar button:hover,
+.check:hover {cursor: pointer;} 
+
+.task i {
+    margin-right: .75em; 
+    color: var(--hex-shadow);
+    transition: color .2s, text-shadow .2s;
+}
+.task i:hover {
+    color: var(--rgba-orange);
+    text-shadow: 0px 0px 2px var(--rgba-orange-80);
+}
+
+.name {flex: 2 0 50px; margin: 0 .75em;}
+.name:focus {outline: 2px solid rgb(181, 228, 255);}
+
+.task-done .name {
+    color: var(--hex-shadow);
+    text-decoration: line-through;
+}
+
+#button-bar {margin: 0 auto; width: fit-content;}
+#button-bar button {
+    position: relative;
+    border: none;
+    background-color: #fff;
+    color: var(--hex-shadow);
+    font-family: var(--font-fam);
+    font-size: 16px;
+    font-weight: 600; 
+    padding: 0;
+    transition: color .2s,
+                border-bottom .2s;
+}
+#button-bar button:hover {
+    color: rgba(38, 38, 38, .5);
+    border-bottom: 1.5px solid rgba(38, 38, 38, .5);
+}
+#button-bar button:not(:last-child) {margin-right: 1em;}
+#button-bar button:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: -.85em;
+    top: 8px;
+    width: 5px;
+    height: 5px;
+    border-radius: 5px;
+    background-color: var(--hex-shadow);
+}
+#button-bar button:focus {
+    outline: none;
+}
+
+@media only screen and (max-width: 830px) {
+    #hero, ul, #warning {width: 100%;}
+}
+@media only screen and (max-width: 670px) {
+    .input-bar button {flex-grow: 2;}
+}
+@media only screen and (max-width: 672px) and (min-width: 671px) {
+    .input-bar #clear {flex-grow: 3;}
+}
