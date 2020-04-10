@@ -103,6 +103,8 @@ document.addEventListener("keydown", event => {
         if (inputElm == activeElm && inputElm.value != "") {
             create(inputElm.value);
             inputElm.value = null;
+        } else if (inputElm.value == "") {
+            document.getElementById("warning").style.opacity = 1;
         }
     }
 
