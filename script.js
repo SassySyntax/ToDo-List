@@ -85,6 +85,16 @@ document.onclick = function (event) {
         localStorage.setItem("toDo");
     }
 
+    if(elm.id == "uncheck-all") {
+        for (let task in toDo) {
+            if (toDo[task].completed === true) {
+                toDo[task].completed = false;
+                document.getElementById(toDo[task].id).classList.remove("task-done");
+            }
+        }
+        localStorage.setItem("toDo");
+    }
+
     if(elm.classList.contains("trash")) {
         const parent = elm.closest("li");
         purge(parent.id);
