@@ -1,7 +1,6 @@
 //START -- setup
 const arrDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const arrMonth = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-const arrWarningMsgs = ["Please enter a task", "All tasks have been checked", "All tasks have been deleted"];
 const arrTest = [
     {
         id: 0,
@@ -34,8 +33,6 @@ document.onclick = function (event) {
     //code inspired by link:
     //https://stackoverflow.com/questions/34896106/attach-event-to-dynamic-elements-in-javascript 
     const elm = event.target;
-    //console.log(event);
-
 
     if(elm.id == "submit") { //create
         const elmInput = document.getElementById("task-input");
@@ -191,7 +188,6 @@ function generateId() {
 
 function appendTaskDOM(id, name, createdStr, completed) {
     const created = new Date(createdStr); 
-    const createdDOMStr = formatDate(created.getDay(), created.getDate(), created.getMonth(), created.getFullYear());
     let taskDOM = document.createElement("li");
         taskDOM.id = id;
         taskDOM.className = "task";
@@ -204,34 +200,9 @@ function appendTaskDOM(id, name, createdStr, completed) {
     document.getElementById("toDo-list").insertBefore(taskDOM, document.getElementById("toDo-list").childNodes[2]);
 }
 
-function formatDate(day, date, month, year) { //what to do with this?
-    return `${arrDay[day]} ${ordinalDate(date)} of ${arrMonth[month]}, ${year}`;
-}
-
 function formatDateHeader() {
     const today = new Date();
     const str = arrMonth[today.getMonth()] + " " + today.getDate().toString() + ", " + today.getFullYear().toString();
     return str;
-}
-
-function ordinalDate(date) { //what to do with this?
-    switch(date) {
-        case 1: case 21: case 31:
-            date += "st";
-            return date;
-            break;
-        case 2: case 22:
-            date += "nd";
-            return date;
-            break;
-        case 3: case 23:
-            date += "rd";
-            return date;
-            break;
-        default:
-            date += "th";
-            return date;
-            break;
-    }
 }
 //END -- functions
