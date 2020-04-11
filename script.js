@@ -1,6 +1,7 @@
 //START -- setup
 const arrDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const arrMonth = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
 const arrTest = [
     {
         id: 0,
@@ -15,6 +16,8 @@ const arrTest = [
         completed: false
     }
 ]
+
+let activeListItem = "";
 
 if (!localStorage.toDo || localStorage.toDo == "[]") {
     localStorage.setItem("toDo", JSON.stringify(arrTest));
@@ -33,11 +36,33 @@ document.onclick = function (event) {
     //code inspired by link:
     //https://stackoverflow.com/questions/34896106/attach-event-to-dynamic-elements-in-javascript 
     const elm = event.target;
+    console.log("content editable", elm.isContentEditable);
 
-    if(elm.id == "submit") { //create
+    if (elm.isContentEditable == true) {
+        const parent = elm.closest("li");
+        activeListItem = parent.id;
+    }
+
+    if (elm.isContentEditable == false && activeListItem != "") {
+        const taskName = document.getElementById(activeListItem).getElementsByClassName("name")[0];
+        let str = taskName.textContent.toString();
+            str = str.trim();
+        if (str != "") {
+            const newKey = "name";
+            alter(activeListItem, newKey, str);
+            taskName.innerHTML = str;
+        } else { 
+            document.getElementById("warning").style.opacity = 1;
+        }
+        activeListItem = "";
+    } 
+
+    if(elm.id == "submit") {
         const elmInput = document.getElementById("task-input");
         if (elmInput.value != "") {
-            create(elmInput.value);
+            let str = elmInput.value;
+            str.trim();
+            create(str);
             elmInput.value = null;
         } else {
             document.getElementById("warning").style.opacity = 1;
@@ -82,7 +107,7 @@ document.onclick = function (event) {
                 document.getElementById(toDo[task].id).classList.add("task-done");
             }
         }
-        localStorage.setItem("toDo");
+        localStorage.setItem("toDo", JSON.stringify(toDo));
     }
 
     if(elm.id == "uncheck-all") {
@@ -92,7 +117,7 @@ document.onclick = function (event) {
                 document.getElementById(toDo[task].id).classList.remove("task-done");
             }
         }
-        localStorage.setItem("toDo");
+        localStorage.setItem("toDo", JSON.stringify(toDo));
     }
 
     if(elm.classList.contains("trash")) {
@@ -104,7 +129,7 @@ document.onclick = function (event) {
 document.addEventListener("keydown", event => {
     const activeElm = document.activeElement;
     
-    if (document.getElementById("task-input") == activeElm) {
+    if (document.getElementById("task-input") == activeElm || document.getElementById(activeListItem).getElementsByClassName("name")[0] == activeElm) {
         document.getElementById("warning").style.opacity = 0;
     }
 
@@ -119,20 +144,21 @@ document.addEventListener("keydown", event => {
     }
 
     if (event.key === "Enter" && activeElm.classList.contains("name")) {
-        activeElm.blur();
-        event.preventDefault();
+        let str = activeElm.textContent.toString();
+            str = str.trim();
+            console.log(str)
+        if (str != "") {
+            const parent = activeElm.closest("li");
+            alter(parent.id, "name", str);
+            activeElm.innerHTML = str;
+            activeElm.blur();
+            event.preventDefault();
+        } else if (str == "") {
+            event.preventDefault();
+            document.getElementById("warning").style.opacity = 1;
+        }
     }
 
-    if (activeElm.classList.contains("name")) {
-        //code inspired by link:
-        //https://www.samanthaming.com/tidbits/32-html-contenteditable/
-        activeElm.addEventListener("input", function() {
-            const parent = activeElm.closest("li");
-            const itemKey = "name";
-            const itemVal = activeElm.innerHTML;
-            alter(parent.id, itemKey, itemVal);
-        });
-    }
 });
 //END -- event listeners
 
