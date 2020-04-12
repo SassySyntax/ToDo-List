@@ -9,8 +9,11 @@
     --rgba-orange: rgba(252, 182, 3, 1);
     --rgba-orange-80: rgba(252, 182, 3, .8);
     --rgba-black: rgba(38, 38, 38, 1);
+    --rgba-black-40: rgba(38, 38, 38, .4);
+    
+    --rgba-blue: rgba(39, 150, 214, 1);
+    --rgba-blue-80: rgba(39, 150, 214, .8);
 
-    --rgba-pale-blue: #81d2e3;
     --hex-shadow: #D8D8D8;
 }
 
@@ -52,6 +55,9 @@ li:not(.input-bar) {
 h1 {font-size: 50px;}
 
 #warning {
+    position: fixed;
+    top: 0;
+    z-index: 5;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -69,7 +75,7 @@ h1 {font-size: 50px;}
 
 #hero {
     width: 40em;
-    margin: 0 auto;
+    margin: 5em auto 0 auto;
     padding: 0 .5em;
 }
 #hero > * {
@@ -92,7 +98,18 @@ h1 {font-size: 50px;}
 }
 #warning span {cursor: default;}
 
-.input-bar > * {height: 64px; font-size: 20px;}
+.input-bar {
+    display: flex;
+    width: 40em;
+    margin: 0 auto .75em auto;
+    padding: 0 .5em;
+}
+
+.input-bar > * {
+    height: 64px; 
+    font-size: 20px;
+    box-shadow: var(--shadow-light);
+}
 
 #task-input {
     flex-grow: 2; 
@@ -101,7 +118,7 @@ h1 {font-size: 50px;}
     border: none;
 }
 #task-input,
-#task-input::placeholder {color: var(--hex-shadow);}
+#task-input::placeholder {color: var(--rgba-black-40);}
 #task-input:focus {outline: 2px solid rgb(181, 228, 255); color: #000;}
 
 .input-bar button {
@@ -131,44 +148,44 @@ h1 {font-size: 50px;}
 .name:focus {outline: 2px solid rgb(181, 228, 255);}
 
 .task-done .name {
-    color: var(--hex-shadow);
+    color: var(--rgba-black-40);
     text-decoration: line-through;
 }
 
-#button-bar {margin: 0 auto; width: fit-content;}
+#button-bar {margin: 1.5em auto 3em auto; width: fit-content;}
 #button-bar button {
     position: relative;
     border: none;
     background-color: #fff;
-    color: var(--hex-shadow);
+    color: var(--rgba-blue-80);
     font-family: var(--font-fam);
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600; 
     padding: 0;
     transition: color .2s,
                 border-bottom .2s;
 }
 #button-bar button:hover {
-    color: rgba(38, 38, 38, .5);
-    border-bottom: 1.5px solid rgba(38, 38, 38, .5);
+    color: var(--rgba-blue);
+    border-bottom: 1.5px solid var(--rgba-blue);
 }
 #button-bar button:not(:last-child) {margin-right: 1em;}
 #button-bar button:not(:last-child)::after {
     content: '';
     position: absolute;
     right: -.85em;
-    top: 8px;
+    top: 10px;
     width: 5px;
     height: 5px;
     border-radius: 5px;
-    background-color: var(--hex-shadow);
+    background-color: var(--rgba-blue-80);
 }
 #button-bar button:focus {
     outline: none;
 }
 
 @media only screen and (max-width: 830px) {
-    #hero, ul, #warning {width: 100%;}
+    #hero, ul, #warning, .input-bar {width: 100%;}
 }
 @media only screen and (max-width: 670px) {
     .input-bar button {flex-grow: 2;}

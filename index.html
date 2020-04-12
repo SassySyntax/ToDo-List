@@ -10,22 +10,22 @@
     <section id="warning">
         <span>Please enter a valid task name :)</span>
     </section>
-    <section id="hero">
+    <header id="hero">
         <h1 id="date">Toot</h1>
         <h2>What will you do today?</h2>
+    </header>
+    <section class="input-bar">
+        <input type="text" name="task-input" id="task-input" placeholder="Type a task here">
+        <button id="submit" type="submit">Add Task</button>
+        <button id="clear">Clear Completed</button>
     </section>
     <ul id="toDo-list" class="list">
-        <li class="input-bar">
-            <input type="text" name="task-input" id="task-input" placeholder="Type a task here">
-            <button id="submit" type="submit">Add Task</button>
-            <button id="clear">Clear Completed</button>
-        </li>
     </ul>
-    <section id="button-bar">
+    <footer id="button-bar">
         <button id="check-all">Check All</button>
         <button id="uncheck-all">Uncheck All</button>
         <button id="clear-all">Clear All</button>
-    </section>
+    </footer>
     
     <script src="script.js"></script>
 </body>

@@ -58,15 +58,7 @@ document.onclick = function (event) {
     } 
 
     if(elm.id == "submit") {
-        const elmInput = document.getElementById("task-input");
-        if (elmInput.value != "") {
-            let str = elmInput.value;
-            str.trim();
-            create(str);
-            elmInput.value = null;
-        } else {
-            document.getElementById("warning").style.opacity = 1;
-        }
+        submitTask();
     }
 
     if(elm.classList.contains("check")) {
@@ -128,25 +120,19 @@ document.onclick = function (event) {
 
 document.addEventListener("keydown", event => {
     const activeElm = document.activeElement;
-    
-    if (document.getElementById("task-input") == activeElm || document.getElementById(activeListItem).getElementsByClassName("name")[0] == activeElm) {
-        document.getElementById("warning").style.opacity = 0;
+
+    if (document.getElementById("task-input") == activeElm || activeElm.classList.contains("name")) {
+        document.getElementById("warning").style.opacity = 0; //disable warning
     }
 
     if (event.key === "Enter" && activeElm == document.getElementById("task-input")) {
-        const inputElm = document.getElementById("task-input");
-        if (inputElm == activeElm && inputElm.value != "") {
-            create(inputElm.value);
-            inputElm.value = null;
-        } else if (inputElm.value == "") {
-            document.getElementById("warning").style.opacity = 1;
-        }
+        submitTask();
     }
 
     if (event.key === "Enter" && activeElm.classList.contains("name")) {
         let str = activeElm.textContent.toString();
             str = str.trim();
-            console.log(str)
+            console.log(str);
         if (str != "") {
             const parent = activeElm.closest("li");
             alter(parent.id, "name", str);
@@ -224,8 +210,20 @@ function generateId() {
     return newId;
 }
 
-function appendTaskDOM(id, name, createdStr, completed) {
-    const created = new Date(createdStr); 
+function submitTask() {
+    const inputElm = document.getElementById("task-input");
+    let str = inputElm.value.toString();
+        str = str.trim();
+    if (str.length != 0) {
+        create(str);
+        inputElm.value = null;
+    } else {
+        document.getElementById("warning").style.opacity = 1;
+        inputElm.value = null;
+    }
+}
+
+function appendTaskDOM(id, name, completed) {
     let taskDOM = document.createElement("li");
         taskDOM.id = id;
         taskDOM.className = "task";
@@ -235,7 +233,7 @@ function appendTaskDOM(id, name, createdStr, completed) {
             <i class="fas fa-check check"></i>
             `;
     if (completed == true) { taskDOM.classList.add("task-done"); }
-    document.getElementById("toDo-list").insertBefore(taskDOM, document.getElementById("toDo-list").childNodes[2]);
+    document.getElementById("toDo-list").insertBefore(taskDOM, document.getElementById("toDo-list").childNodes[1]);
 }
 
 function formatDateHeader() {
