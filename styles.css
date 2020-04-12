@@ -92,11 +92,7 @@ h1 {font-size: 50px;}
     font-size: larger;
 }
 
-#warning span {
-    font-family: var(--font-display);
-    font-weight: 800;
-}
-#warning span {cursor: default;}
+#warning p {cursor: default;}
 
 .input-bar {
     display: flex;
