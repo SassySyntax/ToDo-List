@@ -124,7 +124,7 @@ h1 {font-size: 50px;}
     border: none;
 }
 .input-bar button#submit {background-color: var(--rgba-green);}
-.input-bar button#clear {background-color: var(--rgba-red);}
+.input-bar button#clear-completed {background-color: var(--rgba-red);}
 .input-bar button:focus {outline: 2px solid rgb(181, 228, 255);}
 
 .input-bar button:hover,
@@ -187,5 +187,5 @@ h1 {font-size: 50px;}
     .input-bar button {flex-grow: 2;}
 }
 @media only screen and (max-width: 672px) and (min-width: 671px) {
-    .input-bar #clear {flex-grow: 3;}
+    .input-bar #clear-completed {flex-grow: 3;}
 }
