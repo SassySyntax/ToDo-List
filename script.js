@@ -226,8 +226,10 @@ function appendTaskDOM(id, name, completed) {
         taskDOM.className = "task";
         taskDOM.innerHTML = `
             <span class="name" contenteditable="true">${name}</span>
-            <i class="fas fa-trash trash"></i>
-            <i class="fas fa-check check"></i>
+
+            <button class="btn-task-crap trash" style="font-size: 20px;">&#128465;</button>
+            <button class="btn-task-crap check" style="font-size: 20px;">&#10003;</button>
+
             `;
     if (completed === true) { 
         taskDOM.classList.add("task-done");

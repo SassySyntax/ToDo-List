@@ -14,7 +14,7 @@
     --rgba-blue: rgba(39, 150, 214, 1);
     --rgba-blue-80: rgba(39, 150, 214, .8);
 
-    --hex-shadow: #D8D8D8;
+    --hex-shadow: #545454;
 }
 
 * {box-sizing: border-box;}
@@ -129,6 +129,23 @@ h1 {font-size: 50px;}
 
 .input-bar button:hover,
 .check:hover {cursor: pointer;} 
+
+.task button {
+    border: none;
+    padding: 0;
+    background: none;
+    color: #000000;
+    font-size: inherit;
+    cursor: pointer;
+    margin-right: .75em; 
+    color: var(--hex-shadow);
+    transition: color .2s, text-shadow .2s;
+}
+
+.task button:hover {     
+    color: var(--rgba-orange);
+    text-shadow: 0px 0px 2px var(--rgba-orange-80);
+}
 
 .task i {
     margin-right: .75em; 
